@@ -24,7 +24,11 @@
    ```
    http://0.0.0.0:8000/docs
    ```  
-4. Пример POST запроса при помощи [curl](https://curl.se/docs/):   
+4. Перейти на локальный адрес и сделать POST запрос через Swagger UI:   
+   ```
+   http://0.0.0.0:8000/docs
+   ```  
+   Или, пример, запроса при помощи [curl](https://curl.se/docs/):   
    ```
    curl -X 'POST' \
       'http://0.0.0.0:8000/questions/' \
@@ -40,6 +44,7 @@
    ```
    или  
    ```
+   
    {
        "id": <id>,
        "answer": <answer>,
