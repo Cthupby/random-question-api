@@ -1,0 +1,24 @@
+version: "3.3"
+
+services:
+  db:
+    image: postgres:16
+    container_name: question-db
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DATABASE=postgres
+      - POSTGRES_USER=${DB_USER:-postgres}
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-postgres}
+
+  api:
+    image: random_question_api_image
+    container_name: question-api
+    command: >
+      sh -c "python app/main.py"
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
