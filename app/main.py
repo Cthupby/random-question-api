@@ -5,14 +5,14 @@ from sqlalchemy.orm import Session
 from loguru import logger
 
 from db import SessionLocal, engine, Base
-from schemas import QuestionScheme
+from schemas import NumScheme, QuestionScheme
 from services import get_new_questions, get_questions
 
 # Создание экземпляра FastAPI
 app = FastAPI()
 
 
-# Подключение к сессси базы данных
+# Подключение к сессии базы данных
 def get_db():
     db = SessionLocal()
     try:
@@ -22,14 +22,16 @@ def get_db():
 
 
 @app.post("/questions/")
-def request_questions(questions_num: int, db: Session = Depends(get_db)):
+def request_questions(num: NumScheme, db: Session = Depends(get_db)):
     """
-    Роут для создания новых вопросов.
-    Возвращает последний вопрос, созданный при предыдущем запросе.
+    Роут для создания новых и получения предыдущих вопросов.
+    Необходимо ввести целое число (количество необъодимых вопросов)
+    в поле "questions_num": 2.
+    Возвращает последний вопрос, созданный при запросе.
     Если вопроса нет, то возвращает пустой объект.
     """
-    logger.info(f"Request {questions_num} questions.")
-    db_question = get_new_questions(db, questions_num=questions_num)
+    logger.info(f'Request {num.questions_num} questions.')
+    db_question = get_new_questions(db, questions_num=num.questions_num)
     if not db_question:
         return {}
     return QuestionScheme.model_validate(db_question)
