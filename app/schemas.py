@@ -1,6 +1,13 @@
 from pydantic import BaseModel
 
 
+class NumScheme(BaseModel):
+    """
+    Схема валидации данных количества вопросов.
+    """
+    questions_num: int
+
+
 class QuestionScheme(BaseModel):
     """
     Схема валидации данных модели Вопроса.
