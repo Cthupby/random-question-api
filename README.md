@@ -23,4 +23,29 @@
 4. Перейти на локальный адрес:   
    ```
    http://0.0.0.0:8000/docs
+   ```  
+4. Пример POST запроса при помощи [curl](https://curl.se/docs/):   
+   ```
+   curl -X 'POST' \
+      'http://0.0.0.0:8000/questions/' \
+      -H 'accept: application/json' \
+      -H 'Content-Type: application/json' \
+      -d '{
+          "questions_num": 2
+      }'
+   ```  
+   Ответом должно быть:  
+   ```
+   {}
+   ```
+   или  
+   ```
+   {
+       "id": <id>,
+       "answer": <answer>,
+       "question": <question>,
+       "value": <value>,
+       "created_at": <created_at>,
+       "category_title": <category_title>
+   }
    ```
