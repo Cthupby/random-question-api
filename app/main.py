@@ -25,7 +25,7 @@ def get_db():
 def request_questions(num: NumScheme, db: Session = Depends(get_db)):
     """
     Роут для создания новых и получения предыдущих вопросов.
-    Необходимо ввести целое число (количество необъодимых вопросов)
+    Необходимо ввести целое число (количество вопросов)
     в поле "questions_num": 2.
     Возвращает последний вопрос, созданный при запросе.
     Если вопроса нет, то возвращает пустой объект.
@@ -40,7 +40,7 @@ def request_questions(num: NumScheme, db: Session = Depends(get_db)):
 @app.get("/questions/")
 def read_questions(db: Session = Depends(get_db)):
     """
-    Роут для получения всех вопросов в базе данных.
+    Роут для получения всех вопросов из базы данных.
     """
     questions = get_questions(db)
     return questions
