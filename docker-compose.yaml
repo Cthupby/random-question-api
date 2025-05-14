@@ -2,6 +2,7 @@ version: "3.3"
 
 services:
   db:
+    restart: always
     image: postgres:16
     container_name: question-db
     volumes:
@@ -10,12 +11,15 @@ services:
       - POSTGRES_DATABASE=postgres
       - POSTGRES_USER=${DB_USER:-postgres}
       - POSTGRES_PASSWORD=${DB_PASSWORD:-postgres}
-
   api:
+    restart: always
+    build: .
     image: random_question_api_image
     container_name: question-api
     command: >
       sh -c "python app/main.py"
+    env_file:
+      - .env
     volumes:
       - .:/code
     ports:
