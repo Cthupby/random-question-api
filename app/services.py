@@ -32,7 +32,7 @@ def get_question_by_id(db: Session, question_id: int) -> Question | None:
     Функция для получения вопроса из базы данных по его id.
     Необходима для проверки уникальности вопроса.
     """
-    return db.query(Question).filter(Question.id==question_id).first()
+    return db.query(Question).filter(Question.id == question_id).first()
 
 
 def get_last_question(db: Session) -> Question | None:
@@ -100,4 +100,3 @@ def get_new_questions(
         questions_num,
     ))
     return last_question
-
